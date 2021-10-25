@@ -59,3 +59,6 @@ h1 {
 .green {
   background-color: green;
 }
+.disabled {
+  cursor: not-allowed;
+}

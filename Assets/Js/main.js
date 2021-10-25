@@ -6,7 +6,7 @@ Immagini: va bene utilizzare qualsiasi servizio di placeholder
 ad es. Unsplash (https://unsplash.it/300/300?image=<id>)
  */
 
-
+//inizializzazione variabili
 const posts = [
     {
         id: 1,
@@ -44,33 +44,24 @@ const posts = [
         immagine: "https://i.picsum.photos/id/179/300/300.jpg?hmac=EG56WiFo72qraubmhi9W4fHqaomaMxQ3gMwo6pKvVNs",
         nomeAutore: "Federica Bianchi",
         avatarAutore: "https://i.picsum.photos/id/464/300/300.jpg?hmac=PvV-hZNabWHmZw8hesE0G3qvVAv1JoAsO_Gl4tqYJOY",
-        numeroLikes: 0,
+        numeroLikes: 1,
         dataCreazione:"3 mesi fa"
 
     }
 
 ]
 
-const likes = [1, 2, 3];
-let contatore = 1;
+const likes = [];
+
+//let contatore = 1;
+
 
 // seleziona elementi DOM
 const spanElement = document.getElementsByClassName("newlike")
-//console.log(spanElement);
 
-for (let index = 0; index < spanElement.length; index++) {
-    const element = spanElement[index];
-    console.log(element);
-    
-}
-
-
-
-
+// iterare l'array di oggetti
 for (let index = 0; index < posts.length; index++) {
     const singlePost = posts[index];
-    // console.log(singlePost);
-
     let numberLikes = singlePost.numeroLikes
     //console.log(numberLikes);
     const id = singlePost.id
@@ -96,31 +87,38 @@ for (let index = 0; index < posts.length; index++) {
                     </div>
                 </div>
                 <div class="likes">
-                    <button class="addLike" id=${singlePost.id}> <i class="fas fa-thumbs-up"></i> Mi piace</button>
-                    <p>Piace a <span class="newlike">${singlePost.numeroLikes}</span> persone</p>
+                    <button class="addLike" id="btn_like ${singlePost.id}"> <i class="fas fa-thumbs-up"></i> Mi piace</button>
+                    <p>Piace a <span id="num_like ${singlePost.id}" class="newlike">${singlePost.numeroLikes}</span> persone</p>
                 </div>
             </div>
-    `
+    `;
 
 
 
+    // inserire elementi nel DOM
+    document.querySelector(".container").insertAdjacentHTML("beforeend", postElement);
 
-    document.querySelector(".container").insertAdjacentHTML("beforeend", postElement)
-    document.getElementById(id).addEventListener("click",function() {
-      
+    //evento listener
+    document.getElementById("btn_like "+singlePost.id).addEventListener("click",function() {
 
-
-    if (likes.includes(id)) {
-        console.log("c'è l'id del post con like");
-        let addNewLike = singlePost.numeroLikes + contatore
-        document.getElementById(id).classList.add("green")
-       // spanElement.insertAdjacentHTML("beforeend", addNewLike)
-    //console.log(addNewLike);
-
-    }
-})
+        if (!likes.includes(singlePost.id)) {
+    
+            let addNewLike = singlePost.numeroLikes + 1;
+            this.classList.add("green");
+            let spanElement = document.getElementById("num_like "+singlePost.id);
+        
+            aumentaLike(spanElement, addNewLike);
+            likes.push(singlePost.id)
+           // console.log(likes)
+        }
+    });
 
 }
+
+function aumentaLike(spanElement, nuovoLike) {
+    return spanElement.innerHTML = nuovoLike
+}
+
 
 
 
