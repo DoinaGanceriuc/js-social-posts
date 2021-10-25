@@ -6,6 +6,7 @@ Immagini: va bene utilizzare qualsiasi servizio di placeholder
 ad es. Unsplash (https://unsplash.it/300/300?image=<id>)
  */
 
+
 const posts = [
     {
         id: 1,
@@ -33,7 +34,7 @@ const posts = [
         immagine: "https://i.picsum.photos/id/120/300/300.jpg?hmac=hDgY6Ddzn2TXPA1WBM44RB5mka-jShgV7sXprLSVH4Y",
         nomeAutore: "Mario Rossi",
         avatarAutore: "https://i.picsum.photos/id/845/300/300.jpg?hmac=q5XPOzz2vTZt_PpOgSI8u8tw7bnG85xz42PjWLOcJ6U",
-        numeroLikes: 0,
+        numeroLikes: 5,
         dataCreazione:"1 mese fa"
 
     },
@@ -50,13 +51,30 @@ const posts = [
 
 ]
 
-const likes = [1, 2]
+const likes = [1, 2, 3];
+let contatore = 1;
+
+// seleziona elementi DOM
+const spanElement = document.getElementsByClassName("newlike")
+//console.log(spanElement);
+
+for (let index = 0; index < spanElement.length; index++) {
+    const element = spanElement[index];
+    console.log(element);
+    
+}
+
+
+
 
 for (let index = 0; index < posts.length; index++) {
     const singlePost = posts[index];
-    console.log(singlePost);
-    const profileImg = singlePost.avatarAutore;
-    console.log(profileImg);
+    // console.log(singlePost);
+
+    let numberLikes = singlePost.numeroLikes
+    //console.log(numberLikes);
+    const id = singlePost.id
+    //console.log(id);
     const postElement = `<div class="cards">
                 <div class="profile">
                     <img id="profile_img"
@@ -78,8 +96,8 @@ for (let index = 0; index < posts.length; index++) {
                     </div>
                 </div>
                 <div class="likes">
-                    <p> <i class="fas fa-thumbs-up"></i> Mi piace</p>
-                    <p>Piace a <span>${singlePost.numeroLikes}</span> persone</p>
+                    <button class="addLike" id=${singlePost.id}> <i class="fas fa-thumbs-up"></i> Mi piace</button>
+                    <p>Piace a <span class="newlike">${singlePost.numeroLikes}</span> persone</p>
                 </div>
             </div>
     `
@@ -88,5 +106,25 @@ for (let index = 0; index < posts.length; index++) {
 
 
     document.querySelector(".container").insertAdjacentHTML("beforeend", postElement)
-    
+    document.getElementById(id).addEventListener("click",function() {
+      
+
+
+    if (likes.includes(id)) {
+        console.log("c'è l'id del post con like");
+        let addNewLike = singlePost.numeroLikes + contatore
+        document.getElementById(id).classList.add("green")
+       // spanElement.insertAdjacentHTML("beforeend", addNewLike)
+    //console.log(addNewLike);
+
+    }
+})
+
 }
+
+
+
+
+
+
+

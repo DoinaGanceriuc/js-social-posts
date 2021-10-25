@@ -47,7 +47,15 @@ h1 {
   display: flex;
   justify-content: space-around;
   padding-bottom: 1rem;
+  align-items: center;
 }
 .likes span {
   font-weight: bold;
+}
+.addLike {
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.green {
+  background-color: green;
 }
